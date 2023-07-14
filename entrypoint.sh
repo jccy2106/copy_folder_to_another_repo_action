@@ -40,11 +40,11 @@ fi
 
 echo "Copying contents to git repo"
 # shellcheck disable=SC2115
-rm -rf "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
-mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+rm -rf "$CLONE_DIR/"
+mkdir -p "$CLONE_DIR/"
 shopt -s extglob
 pwd
-cp -a "$INPUT_SOURCE_FOLDER/." !($EXCLUDE_FOLDER) "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+cp -a -R ../ !($EXCLUDE_FOLDER) "$CLONE_DIR/"
 cd "$CLONE_DIR"
 
 echo "Adding git commit"
