@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 set -x
@@ -42,10 +42,11 @@ echo "Copying contents to git repo"
 # shellcheck disable=SC2115
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
-shopt -s extglob
+# shopt -s extglob
 pwd
-echo "copying everything"
-cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
+echo "copying everything excluding fastify"
+# cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
+rsync -av * "$CLONE_DIR/" --exclude fastify
 cd "$CLONE_DIR"
 
 echo "Adding git commit"
