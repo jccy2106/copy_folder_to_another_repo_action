@@ -9,6 +9,11 @@ then
   return 1
 fi
 
+if [ -n "$EXCLUDE_FOLDER" ]
+then
+  echo "Excluding folder '$EXCLUDE_FOLDER'"
+fi
+
 if [ -z "$INPUT_DESTINATION_BRANCH" ]
 then
   INPUT_DESTINATION_BRANCH=master
@@ -37,7 +42,9 @@ echo "Copying contents to git repo"
 # shellcheck disable=SC2115
 rm -rf "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
-cp -a "$INPUT_SOURCE_FOLDER/." "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+shopt -s extglob
+pwd
+cp -a "$INPUT_SOURCE_FOLDER/." !($EXCLUDE_FOLDER) "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 cd "$CLONE_DIR"
 
 echo "Adding git commit"
