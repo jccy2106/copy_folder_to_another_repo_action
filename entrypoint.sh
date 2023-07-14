@@ -55,6 +55,8 @@ if git status | grep -q "Changes to be committed"
 then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
+  echo "Output branch : $OUTPUT_BRANCH"
+  git remote -v
   git push -u origin "HEAD:$OUTPUT_BRANCH"
 else
   echo "No changes detected"
