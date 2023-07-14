@@ -44,7 +44,8 @@ rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 shopt -s extglob
 pwd
-cp -a -R ../ !($EXCLUDE_FOLDER) "$CLONE_DIR/"
+echo "copying everything"
+cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
 cd "$CLONE_DIR"
 
 echo "Adding git commit"
