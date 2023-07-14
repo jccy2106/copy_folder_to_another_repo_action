@@ -48,7 +48,7 @@ echo "copying everything excluding fastify"
 # cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
 rsync -av * "$CLONE_DIR/" --exclude fastify
 cd "$CLONE_DIR"
-
+git init
 echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"
