@@ -57,6 +57,7 @@ then
   echo "Pushing git commit"
   echo "Output branch : $OUTPUT_BRANCH"
   git remote -v
+  git pull
   git remote add origin https://$API_TOKEN_GITHUB@github.com/jccy2106/test-sync.git
   git push -u origin "HEAD:$OUTPUT_BRANCH"
 else
