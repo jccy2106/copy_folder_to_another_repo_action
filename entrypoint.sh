@@ -51,7 +51,7 @@ then
   rsync -av * "$CLONE_DIR/" --exclude "$EXCLUDE_FOLDER"
 else
   echo "copying only fastify"
-  length=${#$EXCLUDE_FOLDER}
+  length=${#EXCLUDE_FOLDER}
   echo "Length of the string: $length"
   echo "EXCLUDE: $EXCLUDE_FOLDER"
   rsync -av "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
