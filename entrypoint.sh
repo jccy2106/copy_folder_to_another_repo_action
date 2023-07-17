@@ -9,7 +9,7 @@ then
   return 1
 fi
 
-if [ -n "$EXCLUDE_FOLDER" ]
+if ![ -z "$EXCLUDE_FOLDER" ]
 then
   echo "Excluding folder '$EXCLUDE_FOLDER'"
 fi
@@ -43,10 +43,16 @@ echo "Copying contents to git repo"
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # shopt -s extglob
-pwd
-echo "copying everything excluding fastify"
+if ! [ -z "$EXCLUDE_FOLDER" ]
+then
+  echo "copying everything excluding fastify"
 # cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
-rsync -av * "$CLONE_DIR/" --exclude fastify
+  rsync -av * "$CLONE_DIR/" --exclude "$EXCLUDE_FOLDER"
+else
+  echo "copying only fastify"
+  rsync -av "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
+fi
+
 cd "$CLONE_DIR"
 git init
 echo "Adding git commit"
@@ -56,8 +62,7 @@ then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
   echo "Output branch : $OUTPUT_BRANCH"
-  git remote -v
-  git remote add origin https://$API_TOKEN_GITHUB@github.com/jccy2106/test-sync.git
+  git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
   git pull origin main --rebase
   echo "rebase"
   git push -u origin "HEAD:$OUTPUT_BRANCH"
