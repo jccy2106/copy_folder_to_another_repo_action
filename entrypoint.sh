@@ -43,27 +43,21 @@ echo "Copying contents to git repo"
 # shellcheck disable=SC2115
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
-# shopt -s extglob
-  echo "copying everything excluding $EXCLUDE_FOLDER"
-# cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
-  rsync -av * "$CLONE_DIR/" --exclude fastify
-
+count=$(find "$CLONE_DIR" -type f | wc -l)
+echo "Number of files: $count"
+echo "copying everything excluding $EXCLUDE_FOLDER"
+rsync -av * "$CLONE_DIR/" --exclude fastify
 
 cd "$CLONE_DIR"
-git init
-git config --global init.defaultBranch main
 echo "Adding git commit"
 git add .
 if git status | grep -q "Changes to be committed"
 then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
-  echo "Output branch : $OUTPUT_BRANCH"
-  git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
-  echo "skip rebase"
-  git pull origin main --rebase
-  git rebase --skip
-  echo "rebase"
+  # git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
+  # echo "skip rebase"
+  # git rebase --skip
   git push -u origin "HEAD:$OUTPUT_BRANCH"
 else
   echo "No changes detected"
