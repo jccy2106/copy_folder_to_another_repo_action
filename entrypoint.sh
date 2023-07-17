@@ -58,7 +58,8 @@ then
   echo "Output branch : $OUTPUT_BRANCH"
   git remote -v
   git remote add origin https://$API_TOKEN_GITHUB@github.com/jccy2106/test-sync.git
-  git pull origin main --ff-only
+  git pull origin main --rebase
+  echo "rebase"
   git push -u origin "HEAD:$OUTPUT_BRANCH"
 else
   echo "No changes detected"
