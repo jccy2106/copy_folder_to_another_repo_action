@@ -44,18 +44,10 @@ echo "Copying contents to git repo"
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # shopt -s extglob
-if [ -n "$EXCLUDE_FOLDER" ]
-then
   echo "copying everything excluding fastify"
 # cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
   rsync -av * "$CLONE_DIR/" --exclude "$EXCLUDE_FOLDER"
-else
-  echo "copying only fastify"
-  length=${#EXCLUDE_FOLDER}
-  echo "Length of the string: $length"
-  echo "EXCLUDE: $EXCLUDE_FOLDER"
-  rsync -av "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
-fi
+
 
 cd "$CLONE_DIR"
 git init
