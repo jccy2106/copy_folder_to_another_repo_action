@@ -34,6 +34,7 @@ git clone --single-branch --branch $INPUT_DESTINATION_BRANCH "https://$API_TOKEN
 
 if [ -n "$INPUT_DESTINATION_BRANCH_CREATE" ]
 then
+  echo "input destination branch: $INPUT_DESTINATION_BRANCH_CREATE"
   git checkout -b "$INPUT_DESTINATION_BRANCH_CREATE"
   OUTPUT_BRANCH="$INPUT_DESTINATION_BRANCH_CREATE"
 fi
@@ -50,6 +51,9 @@ then
   rsync -av * "$CLONE_DIR/" --exclude "$EXCLUDE_FOLDER"
 else
   echo "copying only fastify"
+  length=${#$EXCLUDE_FOLDER}
+  echo "Length of the string: $length"
+  echo "EXCLUDE: $EXCLUDE_FOLDER"
   rsync -av "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
 fi
 
