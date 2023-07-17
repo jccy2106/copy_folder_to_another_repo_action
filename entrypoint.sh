@@ -59,7 +59,7 @@ then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
   echo "Output branch : $OUTPUT_BRANCH"
-  git remote set-url origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
+  git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
   echo "skip rebase"
   git pull origin main --rebase
   git rebase --skip
