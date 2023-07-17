@@ -9,9 +9,9 @@ then
   return 1
 fi
 
-if ![ -z "$EXCLUDE_FOLDER" ]
+if [ -n "$EXCLUDE_FOLDER" ]
 then
-  echo "Excluding folder '$EXCLUDE_FOLDER'"
+  echo "Excluding folder $EXCLUDE_FOLDER"
 fi
 
 if [ -z "$INPUT_DESTINATION_BRANCH" ]
@@ -43,7 +43,7 @@ echo "Copying contents to git repo"
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # shopt -s extglob
-if ! [ -z "$EXCLUDE_FOLDER" ]
+if [ -n "$EXCLUDE_FOLDER" ]
 then
   echo "copying everything excluding fastify"
 # cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
