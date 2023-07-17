@@ -44,9 +44,9 @@ echo "Copying contents to git repo"
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # shopt -s extglob
-  echo "copying everything excluding fastify"
+  echo "copying everything excluding $EXCLUDE_FOLDER"
 # cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
-  rsync -av * "$CLONE_DIR/" --exclude "$EXCLUDE_FOLDER"
+  rsync -av * "$CLONE_DIR/" --exclude fastify
 
 
 cd "$CLONE_DIR"
@@ -60,6 +60,7 @@ then
   echo "Output branch : $OUTPUT_BRANCH"
   git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
   git pull origin main --rebase
+  git rebase --skip
   echo "rebase"
   git push -u origin "HEAD:$OUTPUT_BRANCH"
 else
