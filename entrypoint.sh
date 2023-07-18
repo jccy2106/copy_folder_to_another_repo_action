@@ -58,10 +58,10 @@ then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
   echo "Output branch : $OUTPUT_BRANCH"
-  # git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
+  git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
   # git pull origin main --rebase
   # echo "rebase"
-  git push -u origin "HEAD:$OUTPUT_BRANCH"
+  git push -u -f origin "HEAD:$OUTPUT_BRANCH"
 else
   echo "No changes detected"
 fi
