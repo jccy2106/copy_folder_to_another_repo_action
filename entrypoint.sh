@@ -44,7 +44,7 @@ echo "Copying contents to git repo"
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # rsync -avR "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
-rsync -avR * "$CLONE_DIR/"
+rsync -avR . "$CLONE_DIR/"
 
 cd "$CLONE_DIR"
 git init
