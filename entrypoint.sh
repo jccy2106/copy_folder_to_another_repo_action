@@ -3,16 +3,16 @@
 set -e
 set -x
 
-if [ -z "$INPUT_SOURCE_FOLDER" ]
-then
-  echo "Source folder must be defined"
-  return 1
-fi
+# if [ -z "$INPUT_SOURCE_FOLDER" ]
+# then
+#   echo "Source folder must be defined"
+#   return 1
+# fi
 
-if [ -n "$EXCLUDE_FOLDER" ]
-then
-  echo "Excluding folder $EXCLUDE_FOLDER"
-fi
+# if [ ! -z "$EXCLUDE_FOLDER" ]
+# then
+#   echo "Excluding folder $EXCLUDE_FOLDER"
+# fi
 
 if [ -z "$INPUT_DESTINATION_BRANCH" ]
 then
@@ -43,19 +43,8 @@ echo "Copying contents to git repo"
 # shellcheck disable=SC2115
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
-# shopt -s extglob
-if [ -n "$EXCLUDE_FOLDER" ]
-then
-  echo "copying everything excluding fastify"
-# cp -a -R * !($EXCLUDE_FOLDER) "$CLONE_DIR/"
-  rsync -av * "$CLONE_DIR/" --exclude "$EXCLUDE_FOLDER"
-else
-  echo "copying only fastify"
-  length=${#EXCLUDE_FOLDER}
-  echo "Length of the string: $length"
-  echo "EXCLUDE: $EXCLUDE_FOLDER"
-  rsync -av "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
-fi
+# rsync -avR "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
+rsync -avR * "$CLONE_DIR/"
 
 cd "$CLONE_DIR"
 git init
@@ -66,9 +55,9 @@ then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
   echo "Output branch : $OUTPUT_BRANCH"
-  git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
-  git pull origin main --rebase
-  echo "rebase"
+  # git remote add origin https://$API_TOKEN_GITHUB@github.com/$INPUT_DESTINATION_REPO.git
+  # git pull origin main --rebase
+  # echo "rebase"
   git push -u origin "HEAD:$OUTPUT_BRANCH"
 else
   echo "No changes detected"
