@@ -3,6 +3,8 @@
 set -e
 set -x
 
+tree
+
 # if [ -z "$INPUT_SOURCE_FOLDER" ]
 # then
 #   echo "Source folder must be defined"
@@ -45,7 +47,7 @@ echo "Copying contents to git repo"
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # rsync -avR "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/"
-rsync -avR . "$CLONE_DIR/"
+rsync -avR . "$CLONE_DIR/" --exclude '.git'
 
 cd "$CLONE_DIR"
 git init
