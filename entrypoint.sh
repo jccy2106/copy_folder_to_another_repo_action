@@ -3,7 +3,7 @@
 set -e
 set -x
 
-tree
+tree -a
 
 # if [ -z "$INPUT_SOURCE_FOLDER" ]
 # then
@@ -46,7 +46,8 @@ echo "Copying contents to git repo"
 # shellcheck disable=SC2115
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
-rsync -avr ./* "$CLONE_DIR/"
+# rsync -avr ./* "$CLONE_DIR/"
+cp -avR ./* "$CLONE_DIR/"
 
 cd "$CLONE_DIR"
 git init
