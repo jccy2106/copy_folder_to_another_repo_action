@@ -54,8 +54,8 @@ cd "$CLONE_DIR"
 git init
 echo "Adding git commit"
 git add .
-if git status | grep -q "Changes to be committed"
-then
+# if git status | grep -q "Changes to be committed"
+# then
   git commit --message "$INPUT_COMMIT_MSG"
   echo "Pushing git commit"
   echo "Output branch : $OUTPUT_BRANCH"
@@ -63,6 +63,6 @@ then
   # git pull origin main --rebase
   # echo "rebase"
   git push -u -f origin "HEAD:$OUTPUT_BRANCH"
-else
-  echo "No changes detected"
-fi
+# else
+#   echo "No changes detected"
+# fi
