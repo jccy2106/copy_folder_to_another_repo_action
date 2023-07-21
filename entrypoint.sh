@@ -48,7 +48,7 @@ rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
 # rsync -avr ./* "$CLONE_DIR/"
 
-cp -avR ./. "$CLONE_DIR/" # --archive --verbose --recursive
+cp -avR . "$CLONE_DIR/" # --archive --verbose --recursive
 
 cd "$CLONE_DIR"
 git init
