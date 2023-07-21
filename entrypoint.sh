@@ -51,6 +51,7 @@ rsync -avr . "$CLONE_DIR/" # --archive --verbose --recursive
 # cp -avR . "$CLONE_DIR/" # --archive --verbose --recursive
 
 cd "$CLONE_DIR"
+tree -a
 git init
 echo "Adding git commit"
 git add .
