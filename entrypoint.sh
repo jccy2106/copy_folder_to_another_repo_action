@@ -46,9 +46,9 @@ echo "Copying contents to git repo"
 # shellcheck disable=SC2115
 rm -rf "$CLONE_DIR/"
 mkdir -p "$CLONE_DIR/"
-# rsync -avr ./* "$CLONE_DIR/"
+rsync -avr . "$CLONE_DIR/" # --archive --verbose --recursive
 
-cp -avR . "$CLONE_DIR/" # --archive --verbose --recursive
+# cp -avR . "$CLONE_DIR/" # --archive --verbose --recursive
 
 cd "$CLONE_DIR"
 git init
